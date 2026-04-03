@@ -1,25 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowLeft } from "react-icons/fi";
-
-const questions = [
-  "You regularly make new friends.",
-  "You enjoy being the center of attention.",
-  "You prefer planning over being spontaneous.",
-  "You regularly make new friends.",
-  "You enjoy being the center of attention.",
-  "You prefer planning over being spontaneous.",
-  "You regularly make new friends.",
-  "You enjoy being the center of attention.",
-  "You prefer planning over being spontaneous.",
-  "You regularly make new friends.",
-  "You enjoy being the center of attention.",
-  "You prefer planning over being spontaneous.",
-  "You regularly make new friends.",
-  "You enjoy being the center of attention.",
-  "You prefer planning over being spontaneous.",
-];
+import { collection, query, getDocs } from "firebase/firestore";
+import { db } from "@/firebase-config";
 
 const options = [
   "Strongly Agree",
@@ -29,10 +13,33 @@ const options = [
   "Strongly Disagree",
 ];
 
+type Question = {
+  Order: string,
+  Question: string,
+  Type: number
+}
+
 export default function HomePage() {
   const [current, setCurrent] = useState(0);
-  const [answers, setAnswers] = useState<(string | null)[]>(Array(questions.length).fill(null));
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [answers, setAnswers] = useState<(string | null)[]>([]);
   const [direction, setDirection] = useState<"next" | "back">("next");
+
+  async function fetchQuestions() {
+    const questionData: Question[] = [];
+    const q = query(collection(db, "personality_question"));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      questionData.push(doc.data() as Question);
+    });
+    setQuestions([...questionData.slice(0, 2)]);
+  }
+
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
 
   const handleSelect = (option: string) => {
     const newAnswers = [...answers];
@@ -53,6 +60,9 @@ export default function HomePage() {
       setDirection("next");
       setCurrent(current + 1);
     }
+    else {
+      console.log("calc");
+    }
   };
 
   const handleBack = () => {
@@ -61,6 +71,8 @@ export default function HomePage() {
       setCurrent(current - 1);
     }
   };
+
+  if (questions.length === 0) return;
 
   return (
     <div style={{ fontFamily: "var(--font-poppins)" }} className="h-screen w-full flex items-center justify-center bg-gradient-to-b from-green-200 via-white to-pink-300 px-4">
@@ -95,7 +107,7 @@ export default function HomePage() {
 
             {/* Question */}
             <h2 className="text-base font-medium text-gray-900 mb-6">
-              {questions[current]}
+              {questions[current].Question}
             </h2>
 
             {/* Options */}
@@ -103,9 +115,8 @@ export default function HomePage() {
               {options.map((option, index) => (
                 <label
                   key={index}
-                  className={`flex items-center space-x-3 cursor-pointer p-2 rounded-lg transition ${
-                    answers[current] === option ? "bg-green-100 font-semibold" : ""
-                  }`}
+                  className={`flex items-center space-x-3 cursor-pointer p-2 rounded-lg transition ${answers[current] === option ? "bg-green-100 font-semibold" : ""
+                    }`}
                 >
                   <input
                     type="radio"
@@ -143,7 +154,8 @@ export default function HomePage() {
                 disabled={current === questions.length - 1}
                 className={`px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 disabled:opacity-50`}
               >
-                Next
+                {current === questions.length - 1 ? 'Submit' :
+                  'Next'}
               </button>
             </div>
           </motion.div>
