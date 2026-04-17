@@ -34,7 +34,7 @@ export default function HomePage() {
       // doc.data() is never undefined for query doc snapshots
       questionData.push(doc.data() as Question);
     });
-    setQuestions([...questionData.slice(0, 2)]);
+    setQuestions([...questionData]);
   }
 
   useEffect(() => {
@@ -164,3 +164,104 @@ export default function HomePage() {
     </div>
   );
 }
+
+//   var count1 = 0
+//   var count2 = 0
+//   var count3 = 0
+//   var count4 = 0
+
+//   for (i in 0 until data!!.size) {
+//       println(
+//           "Gaur" +
+//                   "data " + data!![i].selectedValue + " " + data!![i].type + " " + count3
+//       )
+//       when (data!![i].type) {
+
+//           "1" -> {
+//               count1 = data!![i].selectedValue + count1
+//           }
+
+//           "2" -> {
+//               count2 = data!![i].selectedValue + count2
+//           }
+
+//           "3" -> {
+//               count3 = data!![i].selectedValue + count3
+//           }
+//           "4" -> {
+//               count4 = data!![i].selectedValue + count3
+//           }
+//       }
+//   }
+
+//   val type1 = (count1 ) //15 19 22
+//   val type2 = (count2 )
+//   val  type3 = (count3 )
+//   val  type4 = (count4 )
+
+
+//   val sum = type1+type2+type3+type4
+
+//  // println("score value "+goodnessScoref+" "+passionScoref+" "+ignoranceScoref+" "+sum)
+
+//   println("score value  final "+(type1*100/sum )+" "+(type2*100/sum )+" "+ (type3*100/sum )+" "+(type4*100/sum ))
+
+
+
+
+//   // navigator.currentScreen= Screen.ModesScore((goodnessScoref*100/sum ), (passionScoref*100/sum ), (ignoranceScoref*100/sum ))
+
+//   val personalityData = PersonalityData(
+//       type1 = type1 * 100 / sum,
+//       type2 = type2 * 100 / sum,
+//       type3 = type3 * 100 / sum,
+//       type4 = type4 * 100 / sum
+//   )
+
+//   val jsonString = Json.encodeToString(personalityData)
+
+// //                                json.put("type1", (type1*100/sum ))
+// //                                json.put("type2",  (type2*100/sum ))
+// //                                json.put("type3",  (type3*100/sum ))
+// //                                json.put("type4",  (type4*100/sum ))
+//   println("saved score data "+ jsonString)
+
+
+
+//   coroutineScope.launch {
+//       println("saved score data saved "+ jsonString)
+//       prefs.setString(key = "personality_data", value = jsonString)
+//       val login = prefs.getBoolean(ConstantandFunction.isLoggedIn, false)
+
+//       if(login){
+
+//         userRepository.savePersonalityData(jsonString, ConstantandFunction.userid)
+//       }
+
+
+
+//       ConstantandFunction.personlaityscore =true
+//       ConstantandFunction.type1 = (type1 * 100 / sum)
+//       ConstantandFunction.type2 = (type2 * 100 / sum)
+//       ConstantandFunction.type3  =  (type3 * 100 / sum)
+//       ConstantandFunction.type4  =  (type4 * 100 / sum)
+
+//       navigator.push(
+//           PersonalityResultDialog(
+//               (type1 * 100 / sum),
+//               (type2 * 100 / sum),
+//               (type3 * 100 / sum),
+//               (type4 * 100 / sum),
+//               prefs,
+//               data
+//               , true
+//           )
+//       )
+//     //  }
+//    //   else{
+
+
+//    //   }
+
+
+//   }
