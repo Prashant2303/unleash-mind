@@ -1,5 +1,5 @@
 // components/PersonalityTypes.tsx
-import { personalities } from "@/contants";
+import { personalities } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 
