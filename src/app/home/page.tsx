@@ -5,6 +5,7 @@ import TestCards from "@/components/TestCards";
 import BottomNav from "@/components/BottomNav";
 import PersonalityTypes from "@/components/PersonalityTypes";
 import ThreeModes from "@/components/ThreeModes";
+import { Articles } from "@/components/Articles";
 
 export default function Home() {
   return (
@@ -15,9 +16,10 @@ export default function Home() {
       {/* Page Sections */}
       <Hero />
       <TestCards />
-      <BottomNav />
+      <Articles />
       <PersonalityTypes />
       <ThreeModes />
+      <BottomNav />
     </main>
   );
 }
