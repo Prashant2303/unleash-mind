@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { Article } from "@/types";
 import ArticleCard from "@/components/ArticleCard";
 import Link from "next/link";
+import { limit } from "firebase/firestore";
 
-export function Articles() {
+export function ArticlesStrip() {
     const [articles, setArticles] = useState<Article[]>([]);
     const fetchArticles = async () => {
-        const articles = await fetchData("article_data", 4);
+        const articles = await fetchData("article_data", [limit(4)]);
         setArticles(articles as Article[]);
     }
 

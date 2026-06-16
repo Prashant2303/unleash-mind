@@ -28,6 +28,7 @@ export function AllArticles() {
 
   return (
     <div className="space-y-6">
+      <h1 className="text-3xl font-bold mb-4">Articles</h1>
       <div className="-mx-4">
         {articles.map((article) => (
           <div key={article.articleid} className="w-screen max-w-[100vw]">
@@ -38,5 +39,3 @@ export function AllArticles() {
     </div>
   );
 }
-
-export default AllArticles;

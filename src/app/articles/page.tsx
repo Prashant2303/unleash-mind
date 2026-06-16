@@ -1,10 +1,15 @@
-import AllArticles from "./components/AllArticles";
+'use client';
+import { useSearchParams } from "next/navigation";
+import { AllArticles } from "./components/AllArticles";
+import { ArticleDetails } from "./components/ArticleDetails";
 
 export default function Page() {
+  const searchParams = useSearchParams();
+  const articleId = searchParams.get("articleId");
+
   return (
     <main className="px-4 py-6">
-      <h1 className="text-3xl font-bold mb-4">Articles</h1>
-      <AllArticles />
+      {articleId ? <ArticleDetails article={articleId} /> : <AllArticles />}
     </main>
   );
 }
