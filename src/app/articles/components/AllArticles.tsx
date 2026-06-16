@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 import { fetchData } from "@/services/fireStoreService";
 import ArticleCard from "@/components/ArticleCard";

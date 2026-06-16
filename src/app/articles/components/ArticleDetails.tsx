@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 import { fetchData } from "@/services/fireStoreService";
 import { Article } from "@/types";
@@ -15,7 +14,6 @@ export const ArticleDetails = ({ article }: { article: string }) => {
       const results = await fetchData("article_data", [
         where("articleid", "==", article),
       ]);
-      console.log("Fetched article details:", results);
       setDetails((results[0] ?? null) as Article | null);
       setLoading(false);
     }
@@ -32,7 +30,7 @@ export const ArticleDetails = ({ article }: { article: string }) => {
   }
 
   return (
-    <div className="bg-white rounded-md shadow-sm p-4 overflow-hidden">
+    <div>
       <img src={details.image} />
       <h1 className="text-2xl font-semibold mb-2">{details.title}</h1>
       <p className="text-gray-700 mb-4">{details.description}</p>

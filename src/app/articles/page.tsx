@@ -1,15 +1,8 @@
-'use client';
-import { useSearchParams } from "next/navigation";
-import { AllArticles } from "./components/AllArticles";
-import { ArticleDetails } from "./components/ArticleDetails";
+import { Suspense } from "react";
+import Articles from "./components/Articles";
 
-export default function Page() {
-  const searchParams = useSearchParams();
-  const articleId = searchParams.get("articleId");
-
-  return (
-    <main className="px-4 py-6">
-      {articleId ? <ArticleDetails article={articleId} /> : <AllArticles />}
-    </main>
-  );
+export default function ArticlesContainer() {
+  return <Suspense>
+    <Articles />
+  </Suspense>
 }
