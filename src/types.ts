@@ -22,3 +22,14 @@ export type Article = {
   type_disp: string;
   order: number;
 };
+
+export type Quote = {
+  order: number;
+  share_url: string;
+  docid: string;
+  text: string;
+  type: string;
+  liked_count: number;
+  image: string;
+  author: string;
+};

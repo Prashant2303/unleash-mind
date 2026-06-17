@@ -1,4 +1,3 @@
-// app/page.tsx
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TestCards from "@/components/TestCards";
@@ -9,11 +8,8 @@ import { ArticlesStrip } from "@/components/ArticlesStrip";
 
 export default function Home() {
   return (
-    <main className="bg-gray-50 min-h-screen">
-      {/* Top Navbar */}
+    <main className="bg-gray-50 min-h-screen pb-16">
       <Navbar />
-
-      {/* Page Sections */}
       <Hero />
       <TestCards />
       <ArticlesStrip />
